@@ -1,0 +1,49 @@
+Act1:
+1.
+automata{
+VM = (coin-> coffeeBtn->coffee->STOP).
+}
+
+3.
+automata{
+
+Car = green->go->red->(stop->Car).
+
+CarX = green->ONE,
+ONE =go->(stop->ONE|red->stop->CarX).
+
+
+TLred = turnGreen -> One|red->TLred,
+One = (green->One|turnRed->TLred).
+}
+
+
+Act2:
+automata{
+VM1 = coin->(teaBtn->tea->STOP|coffeeBtn->coffee->STOP).
+VM2 = coin->(teaBtn->tea->VM2|coffeeBtn->coffee->VM2).
+
+VM3 = coin->(coffBtn->coffee->VM3|teaBtn->Two),
+Two = (keepMoney->Two|coffee->VM3).
+}
+
+Act3:
+1. I think that Lift2 is more relistic than Lift1.
+Because door could close without entering anything.
+
+2. 
+
+automata{
+Left3=doorOpen->One,
+Two = (doorClose->move->Left3|doorClose->Left3),
+One = (enter->One|doorClose->Left3|goUpBtn->Two).
+}
+
+3
+choose(b)
+
+automata{
+Left3=doorOpen->One,
+One = (enter->One|doorClose->Left3|goUpBtn->doorClose->move->Left3).
+}
+
