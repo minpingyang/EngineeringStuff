@@ -1,0 +1,85 @@
+
+
+Act1
+1.
+automata {
+   Buf = in->out->Buf.
+}
+
+
+2.
+automata {
+   B1 = one:Buf.
+}
+3.
+automata {
+   Buf = in->out->Buf.
+   
+   B1 = one:Buf.
+   B2 = two:Buf.
+   Buf2P = B1/{move/one.out}||B2/{move/two.in}.
+    
+}
+
+4.
+automata {
+   Buf = in->out->Buf.
+   B1 = one:Buf.
+   B2 = two:Buf.
+   Buf2P = B1/{move/one.out}||B2/{move/two.in}.
+   TwoOnePlaceBuffers=simp(abs(Buf2P\{move})).
+     
+}
+
+Act2
+1
+automata {
+   Buf = in->out->Buf.
+   B1 = (one:Buf)/{m/one.out}.
+   B2 = (two:Buf)/{m/two.in}/{m2/two.out}.
+
+   B3 = (three:Buf)/{m2/three.in}.
+   Buf3P = B1 || B2 || B3.
+   ThreeOnePlaceBuffers=simp(abs(Buf3P\{m,m2})).
+     
+}
+
+2.
+automata {
+   P1 =in->x->out->y->P1.
+   P2 =in2->x->out2->y->P2.
+   P= simp(abs(P1||P2)).
+}
+
+
+Act3
+
+Given code
+automata {
+ Sensor = carOn->senOn->carOff->senOff->Sensor.
+ TLred = red->TLred | turnGreen ->G,
+ G=(green->G|turnRed->TLred).
+ Car = carOn->green->carOff->Car.
+ System = Sensor||TLred||Car.
+
+}
+
+1(a）
+Yes, a car can move off the sensor if the light is green
+
+1(b)
+no, the system does not have deadlock.Because this diagram does have a “stop” state. it always keep going.
+
+1(c)
+yes.we can find that it is possible for the traffic light to keep changing colour before the driver moves through the diagram.
+
+2.
+automata {
+ Sensor = carOn->senOn->carOff->senOff->Sensor.
+ TLredX = red->TLredX | turnGreen ->senOff->G,
+ G=(green->G|turnRed->TLredX).
+ Car = carOn->green->carOff->Car.
+ System = Sensor||TLredX||Car.
+ 
+}
+
